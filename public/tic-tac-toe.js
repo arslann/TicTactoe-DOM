@@ -6,7 +6,7 @@ const O_IMAGE =
 const grid = document.getElementById("grid");
 const cells = document.querySelectorAll("#cell");
 
-const WINNING_POS = [
+const WINNING_COMBS = [
   [0, 1, 2],
   [3, 4, 5],
   [6, 7, 8],
@@ -30,19 +30,39 @@ function startGame() {
 
 function clickEvent(e) {
   const cell = e.target;
+  let mark = X_IMAGE;
 
   if (cell.innerHTML != "") {
     return;
   }
 
-  let mark = X_IMAGE;
-
   if (turn == "O") {
     mark = O_IMAGE;
   }
 
-  swapTurns();
   placeMark(cell, mark);
+
+  if (checkWin(mark)) {
+    alert("game over");
+    console.log("game over");
+  } else {
+    swapTurns();
+  }
+}
+
+function checkWin(mark) {
+  const img = `<img src="${mark}" alt="">`;
+
+  for (let i = 0; i < WINNING_COMBS.length; i++) {
+    let combination = WINNING_COMBS[i];
+
+    const out = combination.every((index) => {
+      return cells[index].innerHTML == img;
+    });
+    if (out) return true;
+  }
+
+  return false;
 }
 
 function swapTurns() {
