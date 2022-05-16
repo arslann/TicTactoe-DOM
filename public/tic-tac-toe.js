@@ -6,6 +6,8 @@ const O_IMAGE =
 const grid = document.getElementById("grid");
 const cells = document.querySelectorAll("#cell");
 
+const winnerSpan = document.getElementById("winner");
+
 const WINNING_COMBS = [
   [0, 1, 2],
   [3, 4, 5],
@@ -27,6 +29,11 @@ function startGame() {
     cell.addEventListener("click", clickEvent, { once: true });
   });
 }
+function removeListeners() {
+  cells.forEach((cell) => {
+    cell.removeEventListener("click", clickEvent);
+  });
+}
 
 function clickEvent(e) {
   const cell = e.target;
@@ -43,11 +50,28 @@ function clickEvent(e) {
   placeMark(cell, mark);
 
   if (checkWin(mark)) {
-    alert("game over");
-    console.log("game over");
+    end(false);
+  } else if (checkDraw()) {
+    end(true);
   } else {
     swapTurns();
   }
+}
+
+function end(isDraw) {
+  if (isDraw) {
+    winnerSpan.innerText = "Tie";
+  } else {
+    winnerSpan.innerText = turn;
+  }
+  removeListeners();
+}
+
+function checkDraw() {
+  let output = [...cells].every((cell) => {
+    return cell.innerHTML != "";
+  });
+  return output;
 }
 
 function checkWin(mark) {
