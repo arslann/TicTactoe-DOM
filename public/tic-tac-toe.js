@@ -5,6 +5,8 @@ const O_IMAGE =
 
 const grid = document.getElementById("grid");
 const cells = document.querySelectorAll("#cell");
+const giveupBtn = document.getElementById("giveup");
+const newgameBtn = document.getElementById("newgame");
 
 const winnerSpan = document.getElementById("winner");
 
@@ -24,12 +26,27 @@ let turn = "X";
 function startGame() {
   cells.forEach((cell) => {
     cell.innerHTML = "";
+    winnerSpan.innerText = "";
 
     cell.removeEventListener("click", clickEvent);
     cell.addEventListener("click", clickEvent, { once: true });
   });
+
+  giveupBtn.addEventListener("click", giveUp);
+  newgameBtn.addEventListener("click", newGame);
 }
+
+function newGame() {
+  startGame();
+}
+
+function giveUp() {
+  swapTurns();
+  end(false);
+}
+
 function removeListeners() {
+  giveupBtn.removeEventListener("click", giveUp);
   cells.forEach((cell) => {
     cell.removeEventListener("click", clickEvent);
   });
