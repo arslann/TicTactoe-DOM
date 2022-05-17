@@ -132,22 +132,6 @@ and start a new game. Here's how it should work:
 * When a game is ongoing:
   * Enable the 'Give Up" button.
 
-## Phase 7: Saving Game State
-
-In this phase, store the game state using your choice of storage so that when
-the user refreshes the page, the game isn't reset. The only way to reset should
-be by pressing the "New Game" button.
-
-## BONUS Phase
-
-When you click "New Game", randomly assign the computer as Player X or Player O.
-Then, have the computer play automatically in response to its turn.
-
-For example, if you click "New Game" and the computer becomes Player X, then it
-will play an "X" on the board. Then, you will play an "O". After you click your
-square, the computer will automatically play its "X". And, so on.
-
-If the computer is Player O, then it will play after you play your first "X".
 
 [tic-tac-toe]: https://en.wikipedia.org/wiki/Tic-tac-toe
 [starter]: https://github.com/appacademy/practice-for-week-09-tic-tac-toe-dom-long-practice
